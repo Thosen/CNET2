@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
 
-// make a console app. user will input numbers + enter. we will put there numbers. Once user presses Q + enter, we will output the sum of all numbers entered. 
+// User will input numbers + enter. we will put there numbers. Once user presses Q + enter, we will output the sum of all numbers entered. 
 
 double sum = 0;
 
@@ -25,3 +25,30 @@ while(true)
     }
 }
 Console.WriteLine($"Total: {sum}");
+
+while (true)
+{
+    ConvertCtoF();
+    Console.WriteLine("Do you want to convert another temperature? (Y/N)");
+    string response = Console.ReadLine();
+    if (response.ToUpper() != "Y")
+    {
+        break;
+    }
+}
+
+// Input is temperature in C. Output is temperature in F.
+void ConvertCtoF()
+{
+    Console.WriteLine("Enter temperature in Celsius:");
+    string input = Console.ReadLine();
+    if (double.TryParse(input, out double celsius))
+    {
+        double fahrenheit = celsius * 9 / 5 + 32;
+        Console.WriteLine($"{celsius} C is {fahrenheit} F");
+    }
+    else
+    {
+        Console.WriteLine("Invalid input. Please enter a number.");
+    }
+}
