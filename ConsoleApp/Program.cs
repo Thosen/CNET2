@@ -2,15 +2,47 @@
 
 using ConsoleApp;
 
-DoLinqStuff();
+DoNumbersStuff();
 while (true)
 {
     
 
 }
-
 static void Sandbox()
 {
+}
+
+static void DoNumbersStuff()
+{
+    var numbers = new[] { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+    var strings = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+    //here using my GetNumberString function to convert int to string
+    for (int i = 0; i < numbers.Length; i++)
+    {
+        string numberString = GetNumberString(numbers[i]);
+        Console.WriteLine($"{numbers[i]} -> {numberString}");
+    }
+
+    // Overload for int input to string output
+    static string GetNumberString(int number)
+    {
+        var numbersDictionaryIntToString = new Dictionary<int, string>
+    {
+        { 0, "zero" },
+        { 1, "one" },
+        { 2, "two" },
+        { 3, "three" },
+        { 4, "four" },
+        { 5, "five" },
+        { 6, "six" },
+        { 7, "seven" },
+        { 8, "eight" },
+        { 9, "nine" }
+    };
+
+        return numbersDictionaryIntToString.TryGetValue(number, out var str) ? str : null;
+    }
 }
 
 static void DoLinqStuff()
