@@ -1,5 +1,7 @@
 ﻿// CNET2 console application
 
+using ConsoleApp;
+
 DoLinqStuff();
 while (true)
 {
@@ -46,7 +48,7 @@ static void DoLinqStuff()
 
 
     // F R U I T S
-
+    Console.WriteLine("\n---\n");
     var fruits = new[] { "aPPLE", "BlUeBeRrY", "cHeRry", "RaspbeRry" };
 
     // 1. Find out how many characters all words in the "fruits" array contain in total
@@ -63,7 +65,16 @@ static void DoLinqStuff()
     foreach (var item in upperAndLowerFruits)
         Console.WriteLine(item);
 
-}
+    Console.WriteLine("\n---\n");
+    // now with usage of UpperLowerString class
+    var upperLowerFruits = fruits
+        .Select(f => new UpperLowerString { UpperCase = f.ToUpper(), LowerCase = f.ToLower() })
+        .ToArray();
+
+    Console.WriteLine("Fruits using UpperLowerString class:");
+    foreach (var item in upperLowerFruits)
+        Console.WriteLine($"Upper: {item.UpperCase}, Lower: {item.LowerCase}");
+    }
 
 static void CalculateStuff()
 {
