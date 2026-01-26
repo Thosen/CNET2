@@ -74,7 +74,27 @@ static void DoLinqStuff()
     Console.WriteLine("Fruits using UpperLowerString class:");
     foreach (var item in upperLowerFruits)
         Console.WriteLine($"Upper: {item.UpperCase}, Lower: {item.LowerCase}");
-    }
+
+    Console.WriteLine("\n---\n");
+    //now with anonymous class
+    var anonFruits = fruits
+        .Select(f => new { UpperCase = f.ToUpper(), LowerCase = f.ToLower() })
+        .ToArray();
+
+    Console.WriteLine("Fruits using anonymous class:");
+    foreach (var item in upperLowerFruits)
+        Console.WriteLine($"Upper: {item.UpperCase}, Lower: {item.LowerCase}");
+
+    Console.WriteLine("\n---\n");
+    //now with touple
+    var tupleFruits = fruits
+        .Select(f => (UpperCase: f.ToUpper(), LowerCase: f.ToLower()))
+        .ToArray();
+
+    Console.WriteLine("Fruits using tuple:");
+    foreach (var item in tupleFruits)
+        Console.WriteLine($"Upper: {item.UpperCase}, Lower: {item.LowerCase}");
+}
 
 static void CalculateStuff()
 {
