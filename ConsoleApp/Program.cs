@@ -1,13 +1,48 @@
 ﻿// CNET2 console application
 
-
+DoLinqStuff();
 while (true)
 {
-    CalculateStuff();
-    ConvertStuff();
+    
+
 }
 
+static void Sandbox()
+{
+}
 
+static void DoLinqStuff()
+{
+    int[] numbers = { 11, 2, 13, -97542, 44, -5, 6, 127, -99, 0, 256, 0, 12, 11 };
+
+    // 1. how many positive numbers are in the array
+    int positiveCount = numbers.Count(n => n > 0);
+    Console.WriteLine($"Positive numbers count: {positiveCount}");
+
+    // 2. how many negative numbers are in the array
+    int negativeCount = numbers.Count(n => n < 0);
+    Console.WriteLine($"Negative numbers count: {negativeCount}");
+
+    // 3. sum of positive values
+    int positiveSum = numbers.Where(n => n > 0).Sum();
+    Console.WriteLine($"Sum of positive numbers: {positiveSum}");
+
+    // 4. largest absolute value
+    int maxAbs = numbers.Max(n => Math.Abs(n));
+    Console.WriteLine($"Maximum absolute value: {maxAbs}");
+
+    // 5. all positive even numbers
+    var positiveEven = numbers.Where(n => n > 0 && n % 2 == 0).ToArray();
+    Console.WriteLine("Positive even numbers: " + string.Join(", ", positiveEven));
+
+    // 6. sort the array from smallest to largest values
+    var sorted = numbers.OrderBy(n => n).ToArray();
+    Console.WriteLine("Sorted numbers: " + string.Join(", ", sorted));
+
+    // 7. skip the first 3 elements and sort the remaining values
+    var skip3Sorted = numbers.Skip(3).OrderBy(n => n).ToArray();
+    Console.WriteLine("Sorted after skipping first 3: " + string.Join(", ", skip3Sorted));
+}
 
 static void CalculateStuff()
 {
