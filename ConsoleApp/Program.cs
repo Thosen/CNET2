@@ -42,6 +42,27 @@ static void DoLinqStuff()
     // 7. skip the first 3 elements and sort the remaining values
     var skip3Sorted = numbers.Skip(3).OrderBy(n => n).ToArray();
     Console.WriteLine("Sorted after skipping first 3: " + string.Join(", ", skip3Sorted));
+
+
+
+    // F R U I T S
+
+    var fruits = new[] { "aPPLE", "BlUeBeRrY", "cHeRry", "RaspbeRry" };
+
+    // 1. Find out how many characters all words in the "fruits" array contain in total
+    int totalChars = fruits.Sum(f => f.Length);
+    Console.WriteLine($"Total number of characters in all fruits: {totalChars}");
+
+    // 2. Lowercase all words
+    var lowerFruits = fruits.Select(f => f.ToLower()).ToArray();
+    Console.WriteLine("Fruits in lowercase: " + string.Join(", ", lowerFruits));
+
+    // 3. Uppercase and lowercase (show both for each word)
+    var upperAndLowerFruits = fruits.Select(f => $"Upper: {f.ToUpper()}, Lower: {f.ToLower()}").ToArray();
+    Console.WriteLine("Fruits in upper and lower case:");
+    foreach (var item in upperAndLowerFruits)
+        Console.WriteLine(item);
+
 }
 
 static void CalculateStuff()
