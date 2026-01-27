@@ -11,7 +11,7 @@ namespace Model
         public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public Address Address { get; set; }
+        public Address? Address { get; set; }
         public List<Contract> Contracts { get; set; }
     }
 }

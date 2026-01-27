@@ -4,19 +4,66 @@ using ConsoleApp;
 using ConsoleApp.Models;
 using System.Text.Json;
 using Model;
+using Data;
 using System.Threading.Channels;
 
 Sandbox();
 while (true)
 {
 }
+
+
+
 static void Sandbox()
 {
-    var filePath = @"C:\Users\CZJAMAS2\Desktop\cnet2\data2024.json";
+    
+
+
+    //var dbContext = new PeopleDbContext();
+
+    //var dummyAddress = new Address
+    //{
+    //    Street = "Test Street",
+    //    City = "Test City",
+    //    ZipCode = "00000"
+    //};
+    //Person osoba = new Person
+    //{
+    //    FirstName = "Jan",
+    //    LastName = "Novak",
+    //    DateOfBirth = new DateTime(1990, 5, 20),
+    //    Email = "",
+    //    Address = null,
+    //};
+    //dbContext.People.Add(osoba);
+    //dbContext.SaveChanges();
+
+    //var people_count = dbContext.People.Count();
+
+    //Console.WriteLine("There are " + people_count + " people");
+    //var osoba2rr = dbContext.People.ToList();
+    //var osoba2 = dbContext.People.Where(osoba => osoba.Id == 9).Single();
+    //osoba2.Email = "martina@seznam.cz";
+    //dbContext.SaveChanges();
+    //Console.WriteLine("Osoba 2 email: " + osoba2.Email);
+
+
+
+
+}
+
+static void CreateDb()
+{
+    var filePath = @"C:\Users\ageof\Downloads\data2024.json";
     var content = File.ReadAllText(filePath);
     var people = JsonSerializer.Deserialize<List<Person>>(content);
     var count = people.Count();
     Console.WriteLine($"People count: {count}");
+
+    var dbContext = new PeopleDbContext();
+    dbContext.People.AddRange(people);
+    dbContext.SaveChanges();
+    Console.WriteLine("People saved to database.");
 }
 
 static void DoPeopleStuff()
