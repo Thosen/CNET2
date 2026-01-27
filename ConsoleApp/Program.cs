@@ -1,15 +1,59 @@
 ﻿// CNET2 console application
 
 using ConsoleApp;
+using ConsoleApp.Models;
 
-DoNumbersStuff();
+DoPeopleStuff();
+
 while (true)
 {
-    
+
 
 }
 static void Sandbox()
 {
+}
+
+static void DoPeopleStuff()
+{
+    var student = new Student
+    {
+        Surname = "  nOvAK  ",
+        DateOfBirth = new DateOnly(2000, 01, 30),
+        Trida = "9.B",
+    };
+    student.Adresa = new TextAddress
+    {
+        Ulice = "Hlavní",
+        Mesto = "Brno",
+        PSC = "11000"
+    };
+    var student2 = new Student
+    {
+        Surname = "  sVoboda  ",
+        DateOfBirth = new DateOnly(2001, 05, 15),
+        Trida = "9.A",
+        Adresa = new RuianAdresa
+        {
+            NazevUlice = "Dlouhá",
+            PSC = 73300,
+            NazevObce = "Ostrava",
+            CisloDomovni = 19,
+        }
+    };
+    Console.WriteLine("Text address:");
+    Console.WriteLine(student);
+    Console.WriteLine("Ruian address");
+    Console.WriteLine(student2);
+
+    var teacher = new Teacher
+    {
+        Surname = "  kRAl  ",
+        DateOfBirth = new DateOnly(1980, 03, 20),
+        Payment = 35000,
+    };
+    Console.WriteLine("Teacher:");
+    Console.WriteLine(teacher);
 }
 
 static void DoNumbersStuff()
@@ -182,3 +226,4 @@ static void ConvertStuff()
         }
     }
 }
+
