@@ -1,5 +1,5 @@
 ﻿// CNET2 console application
-// test
+
 using ConsoleApp;
 using ConsoleApp.Models;
 
