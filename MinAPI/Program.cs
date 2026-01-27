@@ -33,7 +33,7 @@ app.MapGet("/people/{id}", (PeopleDbContext db, int id) =>
 
 app.MapGet("/people/email/{email}", (PeopleDbContext db, string email) =>
 {
-    var people = db.People.Include(x => x.Address).Include(x => x.Contracts).Where(p => p.Email.ToLower().Contains(email.ToLower()));
+    var people = db.People.Include(x => x.Address).Include(x => x.Contracts).Where(p => p.Email.ToLower().Contains(email.ToLower())).Take(100);
     if (people == null)
         return Results.NotFound();
     return Results.Ok(people);
