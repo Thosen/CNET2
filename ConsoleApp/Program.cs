@@ -7,53 +7,69 @@ using Model;
 using Data;
 using System.Threading.Channels;
 
-
-var dbContext = new PeopleDbContext();
-
-// oldest person
-var oldestPerson = dbContext.People
-    .OrderBy(p => p.DateOfBirth)
-    .FirstOrDefault();
-if (oldestPerson != null)
-    Console.WriteLine($"Oldest person: {oldestPerson.FirstName} {oldestPerson.LastName}, DOB: {oldestPerson.DateOfBirth:yyyy-MM-dd}");
-else
-    Console.WriteLine("No people in database.");
-
-// how many different cities in db
-var cityCount = dbContext.Addresses
-    .Select(a => a.City)
-    .Distinct()
-    .Count();
-Console.WriteLine($"Number of different cities: {cityCount}");
-
-// how many people from "Brno"
-var peopleFromBrno = dbContext.People
-    .Where(p => p.Address != null && p.Address.City == "Brno")
-    .Count();
-Console.WriteLine($"Number of people from Brno: {peopleFromBrno}");
-
-// how many without contracts
-var peopleWithoutContracts = dbContext.People
-    .Count(p => p.Contracts == null || !p.Contracts.Any());
-Console.WriteLine($"Number of people without contracts: {peopleWithoutContracts}");
-
-// how many without address
-var peopleWithoutAddress = dbContext.People
-    .Count(p => p.Address == null);
-Console.WriteLine($"Number of people without address: {peopleWithoutAddress}");
-
-
+LinqSqlDbTestingStuff();
 
 Sandbox();
 while (true)
 {
 }
+static void LinqSqlDbTestingStuff()
+{
+    var dbContext = new PeopleDbContext();
+
+    // oldest person
+    var oldestPerson = dbContext.People
+        .OrderBy(p => p.DateOfBirth)
+        .FirstOrDefault();
+    if (oldestPerson != null)
+        Console.WriteLine($"Oldest person: {oldestPerson.FirstName} {oldestPerson.LastName}, DOB: {oldestPerson.DateOfBirth:yyyy-MM-dd}");
+    else
+        Console.WriteLine("No people in database.");
+
+    // how many different cities in db
+    var cityCount = dbContext.Addresses
+        .Select(a => a.City)
+        .Distinct()
+        .Count();
+    Console.WriteLine($"Number of different cities: {cityCount}");
+
+    // how many people from "Brno"
+    var peopleFromBrno = dbContext.People
+        .Where(p => p.Address != null && p.Address.City == "Brno")
+        .Count();
+    Console.WriteLine($"Number of people from Brno: {peopleFromBrno}");
+
+    // how many without contracts
+    var peopleWithoutContracts = dbContext.People
+        .Count(p => p.Contracts == null || !p.Contracts.Any());
+    Console.WriteLine($"Number of people without contracts: {peopleWithoutContracts}");
+
+    // how many without address
+    var peopleWithoutAddress = dbContext.People
+        .Count(p => p.Address == null);
+    Console.WriteLine($"Number of people without address: {peopleWithoutAddress}");
+
+    // from which cities are the most people
+    var topCities = dbContext.People
+        .Where(p => p.Address != null)
+        .GroupBy(p => p.Address.City)
+        .Select(g => new { City = g.Key, Count = g.Count() })
+        .OrderByDescending(c => c.Count)
+        .Take(10)
+        .ToList();
+
+    Console.WriteLine("Top 5 cities by number of people:");
+    foreach (var city in topCities)
+    {
+        Console.WriteLine($"{city.City}: {city.Count}");
+    }
 
 
+}
 
 static void Sandbox()
 {
-    
+
 
 
     //var dbContext = new PeopleDbContext();
