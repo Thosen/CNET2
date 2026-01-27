@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp.Models
 {
-    public class Person
+    public class GeneralPerson
     {
         public DateOnly DateOfBirth { get; set; }
 

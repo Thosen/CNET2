@@ -2,16 +2,21 @@
 
 using ConsoleApp;
 using ConsoleApp.Models;
+using System.Text.Json;
+using Model;
+using System.Threading.Channels;
 
-DoPeopleStuff();
-
+Sandbox();
 while (true)
 {
-
-
 }
 static void Sandbox()
 {
+    var filePath = @"C:\Users\CZJAMAS2\Desktop\cnet2\data2024.json";
+    var content = File.ReadAllText(filePath);
+    var people = JsonSerializer.Deserialize<List<Person>>(content);
+    var count = people.Count();
+    Console.WriteLine($"People count: {count}");
 }
 
 static void DoPeopleStuff()

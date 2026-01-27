@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Models
 {
-    public class Student : Person
+    public class Student : GeneralPerson
     {
         // Jmeno, Prijmeni, RokNarozeni, Trida, Adresa
 

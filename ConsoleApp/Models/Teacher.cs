@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Models
 {
-    public class Teacher : Person
+    public class Teacher : GeneralPerson
     {
         public int Payment { get; set; }
 
