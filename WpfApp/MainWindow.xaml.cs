@@ -27,11 +27,11 @@ namespace WpfApp
             const int amountOfWords = 10;
             const string filepath = "D:\\repos\\CNET2\\bigFiles";
             var files = Directory.GetFiles(filepath, "*.*");
-            var fileWordCounts = new Dictionary<string, List<KeyValuePair<string, int>>>(StringComparer.OrdinalIgnoreCase);
+            var fileWordCounts = new Dictionary<string, List<KeyValuePair<string, int>>>();
 
             foreach (var file in files)
             {
-                var wordCount = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                var wordCount = new Dictionary<string, int>();
                 var lines = File.ReadAllLines(file);
 
                 foreach (var line in lines)
