@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -125,6 +127,94 @@ namespace WpfApp
                 txtBox1.Text = byOne;
                 txtBox2.Text = whole;
             }
+
+            Mouse.OverrideCursor = null;
+        }
+
+        async private void btnWholeParallel_Click(object sender, RoutedEventArgs e)
+        {
+            /*
+              10 most common words in all files globally
+               USING PARALLEL method
+           */
+            const string filepath = "D:\\repos\\CNET2\\bigFiles";
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+
+            Stopwatch time = new Stopwatch();
+            time.Start();
+
+            txtBox2.Text = "";
+
+            List<string> files = Directory.EnumerateFiles(filepath, "*.txt")
+                                         .ToList();
+
+            ConcurrentDictionary<string, int> wordCount = new();
+
+            //foreach (var file in files)
+            Parallel.ForEach(files, file =>
+            {
+                var words = System.IO.File.ReadAllLines(file);
+
+                foreach (var word in words)
+                {
+                    wordCount.AddOrUpdate(word, 1, (key, oldValue) => oldValue + 1);
+                }
+            });
+
+            var top10 = wordCount.OrderByDescending(x => x.Value).Take(10);
+
+            foreach (var item in top10)
+            {
+                txtBox2.Text += $"{item.Key} - {item.Value}{Environment.NewLine}";
+            }
+            txtBox2.Text += Environment.NewLine;
+
+            time.Stop();
+            txtBox2.Text += "Time: " + time.ElapsedMilliseconds.ToString() + " ms\n\n";
+
+            Mouse.OverrideCursor = null;
+        }
+
+        private async void btnWholeParallelAsync_Click(object sender, RoutedEventArgs e)
+        {
+            /*
+              10 most common words in all files globally
+               USING PARALLEL method
+           */
+            const string filepath = "D:\\repos\\CNET2\\bigFiles";
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+
+            Stopwatch time = new Stopwatch();
+            time.Start();
+
+            txtBox2.Text = "";
+
+            List<string> files = Directory.EnumerateFiles(filepath, "*.txt")
+                                         .ToList();
+
+            ConcurrentDictionary<string, int> wordCount = new();
+
+            //foreach (var file in files)
+            await Parallel.ForEachAsync(files, async(file, cancellationToken) =>
+            {
+                var words = System.IO.File.ReadAllLines(file);
+
+                foreach (var word in words)
+                {
+                    wordCount.AddOrUpdate(word, 1, (key, oldValue) => oldValue + 1);
+                }
+            });
+
+            var top10 = wordCount.OrderByDescending(x => x.Value).Take(10);
+
+            foreach (var item in top10)
+            {
+                txtBox2.Text += $"{item.Key} - {item.Value}{Environment.NewLine}";
+            }
+            txtBox2.Text += Environment.NewLine;
+
+            time.Stop();
+            txtBox2.Text += "Time: " + time.ElapsedMilliseconds.ToString() + " ms\n\n";
 
             Mouse.OverrideCursor = null;
         }
