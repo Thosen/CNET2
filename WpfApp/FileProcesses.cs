@@ -122,9 +122,9 @@ namespace WpfApp
                     .OrderByDescending(kvp => kvp.Value)
                     .Take(amountOfWords)
                     .ToList();
-                fileWordCounts[System.IO.Path.GetFileName(file)] = topFileWords;
+                fileWordCounts[Path.GetFileName(file)] = topFileWords;
 
-                sbByOne.AppendLine($"File: {System.IO.Path.GetFileName(file)}");
+                sbByOne.AppendLine($"File: {Path.GetFileName(file)}");
                 foreach (var word in topFileWords)
                 {
                     sbByOne.AppendLine($"{word.Key}: {word.Value}");
