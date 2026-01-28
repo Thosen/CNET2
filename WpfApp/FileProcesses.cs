@@ -85,6 +85,37 @@ namespace WpfApp
             return totalWordCount;
         }
 
+        public static Dictionary<string, int> GetTopWordsWholeWithProgress(string[] files, IProgress<string> progress, CancellationToken cancellationToken)
+        {
+            var totalWordCount = new Dictionary<string, int>();
+
+            foreach (var file in files)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    progress.Report("Operation cancelled by user.\n");
+                    return totalWordCount;
+                }
+
+                progress.Report($"Processing file: {Path.GetFileName(file)}\n");
+                var lines = File.ReadAllLines(file);
+
+                foreach (var line in lines)
+                {
+                    var word = line.Trim();
+                    if (string.IsNullOrEmpty(word))
+                        continue;
+
+                    if (totalWordCount.ContainsKey(word))
+                        totalWordCount[word]++;
+                    else
+                        totalWordCount[word] = 1;
+                }
+            }
+
+            return totalWordCount;
+        }
+
         public static async IAsyncEnumerable<(string byOne, string whole)> GetIncrementalStatsAsync(int amountOfWords, string[] files)
         {
             var fileWordCounts = new Dictionary<string, List<KeyValuePair<string, int>>>();

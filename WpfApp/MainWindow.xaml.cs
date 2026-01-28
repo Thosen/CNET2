@@ -21,6 +21,8 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        CancellationTokenSource _cts = new CancellationTokenSource();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -217,6 +219,57 @@ namespace WpfApp
             txtBox2.Text += "Time: " + time.ElapsedMilliseconds.ToString() + " ms\n\n";
 
             Mouse.OverrideCursor = null;
+        }
+
+        private async void btnSearchAllAsyncLong_Click(object sender, RoutedEventArgs e)
+        {
+            txtBox2.Text = string.Empty;
+            Mouse.OverrideCursor = Cursors.Wait;
+            Stopwatch time = Stopwatch.StartNew();
+            const int amountOfWords = 10;
+            const string filepath = "D:\\repos\\CNET2\\bigFiles";
+            var files = Directory.GetFiles(filepath, "*.*");
+
+
+            _cts = new CancellationTokenSource();
+            CancellationToken cancellationToken = _cts.Token;
+
+            IProgress<string> progress = new Progress<string>(message =>
+            {
+                txtBox2.Text += message;
+            });
+
+            Dictionary<string, int> totalWordCount = await Task.Run(() => FileProcesses.GetTopWordsWholeWithProgress(files, progress, cancellationToken));
+
+            var topWords = totalWordCount
+                .OrderByDescending(kvp => kvp.Value)
+                .Take(amountOfWords)
+                .ToList();
+
+            if (cancellationToken.IsCancellationRequested)
+            {
+                time.Stop();
+                txtBox2.Text += "Time: " + time.ElapsedMilliseconds.ToString() + " ms\n\n";
+                Mouse.OverrideCursor = null;
+                return;
+            }
+
+            var sb = new StringBuilder();
+            sb.AppendLine("Top 10 words in all files together:");
+            foreach (var word in topWords)
+            {
+                sb.AppendLine($"{word.Key}: {word.Value}");
+            }
+
+            time.Stop();
+            txtBox2.Text = "Time: " + time.ElapsedMilliseconds.ToString() + " ms\n\n";
+            txtBox2.Text += sb.ToString();
+            Mouse.OverrideCursor = null;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            _cts.Cancel();
         }
     }
 }

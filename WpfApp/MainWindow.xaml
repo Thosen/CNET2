@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="900">
+        Title="MainWindow" Height="450" Width="1050">
     <Grid>
         <Button x:Name="btnByOne" Content="Search by each" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnByOne_Click">
             <Button.Background>
@@ -17,7 +17,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnWhole" Content="Search whole" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnWhole_Click">
+        <Button x:Name="btnWhole" Content="Search all" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnWhole_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -61,6 +61,26 @@
             </Button.Background>
         </Button>
         <Button x:Name="btnWholeParallelAsync" Content="Search all&#xD;&#xA;parallel async" HorizontalAlignment="Left" Margin="635,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnWholeParallelAsync_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF49EF0F" Offset="1"/>
+                    <GradientStop Color="#FFA0DC86" Offset="0.853"/>
+                    <GradientStop Color="#FF030B00" Offset="0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnSearchAllAsyncLong" Content="Search all&#xD;&#xA;async long" HorizontalAlignment="Left" Margin="760,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnSearchAllAsyncLong_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF49EF0F" Offset="1"/>
+                    <GradientStop Color="#FFA0DC86" Offset="0.853"/>
+                    <GradientStop Color="#FF030B00" Offset="0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnCancel" Content="cancel&#xD;&#xA;long" HorizontalAlignment="Left" Margin="885,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnCancel_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
