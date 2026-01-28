@@ -115,5 +115,14 @@ namespace WpfApp
             txtBox2.Text += sb.ToString();
             Mouse.OverrideCursor = null;
         }
+
+        private void btnColour_Click(object sender, RoutedEventArgs e)
+        {
+            //here I want to randomly change the background colour of the window
+            var rand = new Random();
+            var color = Color.FromRgb((byte)rand.Next(256), (byte)rand.Next(256), (byte)rand.Next(256));
+            this.Background = new SolidColorBrush(color);
+
+        }
     }
 }

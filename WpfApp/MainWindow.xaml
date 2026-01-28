@@ -39,6 +39,6 @@
                 <TextBlock x:Name="txtBox2" TextWrapping="Wrap" />
             </ScrollViewer>
         </Grid>
-
+        <Button x:Name="btnColour" Content="Colour" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="Black" Background="White" Height="56" Width="120" Click="btnColour_Click"/>
     </Grid>
 </Window>
