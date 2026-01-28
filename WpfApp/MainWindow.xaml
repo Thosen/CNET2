@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="900">
     <Grid>
-        <Button x:Name="btnOK" Content="OK" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnOk_Click">
+        <Button x:Name="btnByOne" Content="Search by each" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnByOne_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -17,9 +17,28 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ScrollViewer HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Height="250" Width="760">
-            <TextBlock x:Name="txtBox" TextWrapping="Wrap" Text="TextBlock"/>
-        </ScrollViewer>
+        <Button x:Name="btnWhole" Content="Search whole" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnWhole_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF49EF0F" Offset="1"/>
+                    <GradientStop Color="#FFA0DC86" Offset="0.853"/>
+                    <GradientStop Color="#FF030B00" Offset="0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Grid Margin="10,80,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer Grid.Column="0" Margin="0,0,5,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <TextBlock x:Name="txtBox1" TextWrapping="Wrap" />
+            </ScrollViewer>
+            <ScrollViewer Grid.Column="1" Margin="5,0,0,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <TextBlock x:Name="txtBox2" TextWrapping="Wrap" />
+            </ScrollViewer>
+        </Grid>
 
     </Grid>
 </Window>
