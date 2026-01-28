@@ -6,8 +6,43 @@ using System.Text.Json;
 using Model;
 using Data;
 using System.Threading.Channels;
+using System.Net.Http.Json;
+using Model;
+using System.Net.Http.Json;
 
-LinqSqlDbTestingStuff();
+
+var client = new HttpClient();
+
+var url = "https://localhost:7281/";
+client.BaseAddress = new Uri(url);
+
+
+try
+{
+    var person = await client.GetFromJsonAsync<Person>("/people/30");
+    Console.WriteLine(person.FirstName);
+}
+catch (Exception)
+{
+
+    Console.WriteLine("Some error occured!");
+}
+
+try
+{
+    var person = await client.GetFromJsonAsync<Person>("/people/30000");
+    Console.WriteLine(person.FirstName);
+}
+catch (Exception)
+{
+
+    Console.WriteLine("Some error occured!");
+}
+
+
+
+Console.WriteLine("End");
+Console.ReadLine();
 
 Sandbox();
 while (true)
