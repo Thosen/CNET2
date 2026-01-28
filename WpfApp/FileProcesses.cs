@@ -37,6 +37,30 @@ namespace WpfApp
 
             return fileWordCounts;
         }
+        public static Dictionary<string, int> GetTopWordsWholeAsyncBetter(string[] files)
+        {
+            var totalWordCount = new Dictionary<string, int>();
+
+            foreach (var file in files)
+            {
+                var lines = File.ReadAllLines(file);
+
+                foreach (var line in lines)
+                {
+                    var word = line.Trim();
+                    if (string.IsNullOrEmpty(word))
+                        continue;
+
+                    if (totalWordCount.ContainsKey(word))
+                        totalWordCount[word]++;
+                    else
+                        totalWordCount[word] = 1;
+                }
+            }
+
+            return totalWordCount;
+        }
+
         public static Dictionary<string, int> GetTopWordsWhole(string[] files)
         {
             var totalWordCount = new Dictionary<string, int>();

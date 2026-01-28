@@ -68,7 +68,7 @@ namespace WpfApp
 
         
 
-        private void btnWhole_Click(object sender, RoutedEventArgs e)
+        async private void btnWhole_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
             Stopwatch time = Stopwatch.StartNew();
@@ -77,7 +77,9 @@ namespace WpfApp
             var files = Directory.GetFiles(filepath, "*.*");
 
             // Dictionary to count words across all files
-            Dictionary<string, int> totalWordCount = FileProcesses.GetTopWordsWhole(files);
+
+
+            Dictionary<string, int> totalWordCount = await Task.Run(() => FileProcesses.GetTopWordsWhole(files));
 
             var topWords = totalWordCount
                 .OrderByDescending(kvp => kvp.Value)
