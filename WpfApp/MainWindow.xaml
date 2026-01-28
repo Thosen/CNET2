@@ -40,5 +40,15 @@
             </ScrollViewer>
         </Grid>
         <Button x:Name="btnColour" Content="Colour" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="Black" Background="White" Height="56" Width="120" Click="btnColour_Click"/>
+        <Button x:Name="btnWholeAll" Content="Search all" HorizontalAlignment="Left" Margin="385,10,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="#FF092BE8" Foreground="#FFDAD550" Height="56" Width="120" Click="btnWholeAll_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF49EF0F" Offset="1"/>
+                    <GradientStop Color="#FFA0DC86" Offset="0.853"/>
+                    <GradientStop Color="#FF030B00" Offset="0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

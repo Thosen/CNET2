@@ -109,5 +109,24 @@ namespace WpfApp
             this.Background = new SolidColorBrush(color);
 
         }
+
+        async private void btnWholeAll_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            const int amountOfWords = 10;
+            const string filepath = "D:\\repos\\CNET2\\bigFiles";
+            var files = Directory.GetFiles(filepath, "*.*");
+
+            txtBox1.Text = "";
+            txtBox2.Text = "";
+
+            await foreach (var (byOne, whole) in FileProcesses.GetIncrementalStatsAsync(amountOfWords, files))
+            {
+                txtBox1.Text = byOne;
+                txtBox2.Text = whole;
+            }
+
+            Mouse.OverrideCursor = null;
+        }
     }
 }
